@@ -1,0 +1,14 @@
+---
+- name: Run a simple python script on a system
+  hosts: all
+  become: no
+  tasks:
+    - name: Run a simple hello script to demo capability
+      script: ./python_simple
+      args:
+        chdir: /home/ec2-user/test
+        creates: mylog.txt
+      register: results
+    - name: Dump out results from last command
+      debug:
+        msg: "{{ results }}"
